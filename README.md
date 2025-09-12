@@ -1,4 +1,4 @@
-# 🏨 Accommodation Booking Platform with Naver Pay & Kakao Pay Integration
+# 🏨 Accommodation Booking Platform
 
 This is a full-stack web application designed for booking accommodations, integrating **Naver Pay** and **Kakao Pay** payment gateways (popular in South Korea).  
 The platform supports **User booking features** and a **powerful Admin dashboard** for managing listings, bookings, and payments.
