@@ -101,13 +101,15 @@ will provide later
 
 This project is licensed under the MIT License. 
 
-👨‍💻 Author
+## 👨‍💻 Author
+
 Prince Bhatt
+
 Full Stack Web Developer
 
 📧 Email: princebhatt316@gmail.com
 
-🌐 Portfolio: [Prince Bhatt](https://princebhatt03.github.io/Portfolio)
+🌐 Portfolio: [Link](https://princebhatt03.github.io/Portfolio)
 
 💼 GitHub: [princebhatt03](https://github.com/princebhatt03)
 
