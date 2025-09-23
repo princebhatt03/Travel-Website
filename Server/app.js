@@ -7,6 +7,8 @@ const MongoStore = require('connect-mongo');
 const flash = require('express-flash');
 const http = require('http');
 const connectToDb = require('./db/db');
+const ownerRoutes = require('./routes/owner.routes');
+const userRoutes = require('./routes/user.routes');
 
 // Connect to Database
 connectToDb();
@@ -68,5 +70,8 @@ app.get('/', (req, res) => {
 });
 
 // API Routes
+
+app.use('/api/owners', ownerRoutes);
+app.use('/api/users', userRoutes);
 
 module.exports = { app, server };
