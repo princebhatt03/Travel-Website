@@ -1,6 +1,8 @@
-2025-09-23 10:44:51 [INFO]: New owner registered - ID: 68d22ccb3c8adf72362cfd47, Email: p@gmail.com
-2025-09-23 10:46:19 [WARN]: Login failed - wrong password for email: p@gmail.com
-2025-09-23 10:46:49 [INFO]: New owner registered - ID: 68d22d413c8adf72362cfd4b, Email: p@gmail.com
-2025-09-23 10:47:07 [WARN]: Login failed - wrong password for email: p@gmail.com
-2025-09-23 10:48:41 [INFO]: New owner registered - ResortID: RES-4366, Email: p@gmail.com
-2025-09-23 10:49:03 [WARN]: Login failed - invalid ResortID: undefined
+2025-09-23 16:59:52 [ERROR]: Registration error: Owner validation failed: resortId: Path `resortId` is required.
+2025-09-23 17:00:29 [INFO]: New owner registered - ID: 68d284d542480a50b59b0ae2, Email: p@gmail.com
+2025-09-23 17:01:19 [WARN]: Login failed - wrong password for email: p@gmail.com
+2025-09-23 17:07:08 [INFO]: New owner registered - ID: 68d286632ad4ddc622a29f85, Email: p@gmail.com
+2025-09-23 17:07:20 [INFO]: Owner logged in - ID: 68d286632ad4ddc622a29f85
+2025-09-23 17:08:10 [INFO]: Profile fetched - Owner ID: 68d286632ad4ddc622a29f85
+2025-09-23 17:10:16 [INFO]: Profile updated - Owner ID: 68d286632ad4ddc622a29f85
+2025-09-23 17:11:01 [INFO]: Owner deleted - ID: 68d286632ad4ddc622a29f85

@@ -1,11 +1,8 @@
-2025-09-23 11:40:41 [INFO]: New user registered - ID: 68d239e171f50a3deb51f027, Email: p@gmail.com
-2025-09-23 11:41:51 [WARN]: Login failed - wrong password for email: p@gmail.com
-2025-09-23 11:41:56 [INFO]: User logged in - ID: 68d239e171f50a3deb51f027
-2025-09-23 11:43:29 [INFO]: Profile fetched for User ID: 68d239e171f50a3deb51f027
-2025-09-23 11:45:37 [INFO]: Profile updated - User ID: 68d239e171f50a3deb51f027
-2025-09-23 11:48:57 [INFO]: Profile fetched for User ID: 68d239e171f50a3deb51f027
-2025-09-23 11:49:53 [WARN]: Login failed - wrong password for email: p@gmail.com
-2025-09-23 11:50:00 [INFO]: User logged in - ID: 68d239e171f50a3deb51f027
-2025-09-23 11:50:14 [ERROR]: Logout error: Cannot read properties of undefined (reading 'id')
-2025-09-23 11:51:03 [ERROR]: Logout error: Cannot read properties of undefined (reading 'id')
-2025-09-23 11:51:28 [INFO]: User deleted - ID: 68d239e171f50a3deb51f027
+2025-09-23 17:02:26 [INFO]: New user registered - ID: 68d2854a42480a50b59b0ae6, Email: p@gmail.com
+2025-09-23 17:02:40 [INFO]: User logged in - ID: 68d2854a42480a50b59b0ae6
+2025-09-23 17:03:09 [INFO]: Profile fetched for User ID: 68d2854a42480a50b59b0ae6
+2025-09-23 17:03:38 [ERROR]: Logout error: Cannot read properties of undefined (reading 'id')
+2025-09-23 17:04:11 [INFO]: User logged in - ID: 68d2854a42480a50b59b0ae6
+2025-09-23 17:04:26 [INFO]: Profile updated - User ID: 68d2854a42480a50b59b0ae6
+2025-09-23 17:04:54 [INFO]: User deleted - ID: 68d2854a42480a50b59b0ae6
+2025-09-23 17:11:13 [WARN]: Auth failed - User not found for token

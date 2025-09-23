@@ -5,9 +5,7 @@ const { ownerLogger } = require('../utils/logger');
 
 // Generate JWT Token
 const generateToken = id => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '7d',
-  });
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 };
 
 const ownerController = () => {
@@ -29,21 +27,24 @@ const ownerController = () => {
         return res.status(400).json({ message: 'Email already exists' });
       }
 
+      // ✅ hash password before saving
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
       const owner = await Owner.create({
         resortName,
         ownerName,
         email,
+        password: hashedPassword,
         photos: photos || [],
-        password,
       });
 
       ownerLogger.info(
-        `New owner registered - ResortID: ${owner.resortId}, Email: ${owner.email}`
+        `New owner registered - ID: ${owner._id}, Email: ${owner.email}`
       );
 
       res.status(201).json({
         _id: owner._id,
-        resortId: owner.resortId,
         resortName: owner.resortName,
         ownerName: owner.ownerName,
         email: owner.email,
@@ -56,34 +57,30 @@ const ownerController = () => {
     }
   };
 
-  // @desc Login Owner
+  // @desc Login Owner (via email + password)
   const loginOwner = async (req, res) => {
     try {
-      const { resortId, password } = req.body;
-      const owner = await Owner.findOne({ resortId });
+      const { email, password } = req.body;
+      if (!email || !password) {
+        return res.status(400).json({ message: 'Email and password required' });
+      }
 
+      const owner = await Owner.findOne({ email });
       if (!owner) {
-        ownerLogger.warn(`Login failed - invalid ResortID: ${resortId}`);
-        return res
-          .status(400)
-          .json({ message: 'Invalid Resort ID or Password' });
+        ownerLogger.warn(`Login failed - invalid email: ${email}`);
+        return res.status(400).json({ message: 'Invalid email or password' });
       }
 
       const isMatch = await bcrypt.compare(password, owner.password);
       if (!isMatch) {
-        ownerLogger.warn(
-          `Login failed - wrong password for ResortID: ${resortId}`
-        );
-        return res
-          .status(400)
-          .json({ message: 'Invalid Resort ID or Password' });
+        ownerLogger.warn(`Login failed - wrong password for email: ${email}`);
+        return res.status(400).json({ message: 'Invalid email or password' });
       }
 
-      ownerLogger.info(`Owner logged in - ResortID: ${resortId}`);
+      ownerLogger.info(`Owner logged in - ID: ${owner._id}`);
 
       res.json({
         _id: owner._id,
-        resortId: owner.resortId,
         resortName: owner.resortName,
         ownerName: owner.ownerName,
         email: owner.email,
@@ -100,15 +97,13 @@ const ownerController = () => {
   const getOwner = async (req, res) => {
     try {
       const { id } = req.params;
-      const owner = await Owner.findOne({ id }).select('-password');
-
+      const owner = await Owner.findById(id).select('-password');
       if (!owner) {
         ownerLogger.warn(`Get profile failed - invalid Owner ID: ${id}`);
         return res.status(404).json({ message: 'Owner not found' });
       }
 
-      ownerLogger.info(`Profile fetched for ResortID: ${resortId}`);
-
+      ownerLogger.info(`Profile fetched - Owner ID: ${id}`);
       res.json(owner);
     } catch (error) {
       ownerLogger.error(`Get profile error: ${error.message}`);
@@ -119,12 +114,12 @@ const ownerController = () => {
   // @desc Update Owner Profile
   const updateOwner = async (req, res) => {
     try {
-      const { resortId } = req.params;
+      const { id } = req.params;
       const updates = req.body;
 
-      const owner = await Owner.findOne({ resortId });
+      const owner = await Owner.findById(id);
       if (!owner) {
-        ownerLogger.warn(`Update failed - invalid ResortID: ${resortId}`);
+        ownerLogger.warn(`Update failed - invalid Owner ID: ${id}`);
         return res.status(404).json({ message: 'Owner not found' });
       }
 
@@ -136,13 +131,12 @@ const ownerController = () => {
       Object.assign(owner, updates);
       await owner.save();
 
-      ownerLogger.info(`Profile updated - ResortID: ${resortId}`);
+      ownerLogger.info(`Profile updated - Owner ID: ${id}`);
 
       res.json({
         message: 'Profile updated successfully',
         owner: {
           _id: owner._id,
-          resortId: owner.resortId,
           resortName: owner.resortName,
           ownerName: owner.ownerName,
           email: owner.email,
@@ -158,16 +152,14 @@ const ownerController = () => {
   // @desc Delete Owner
   const deleteOwner = async (req, res) => {
     try {
-      const { resortId } = req.params;
-      const owner = await Owner.findOneAndDelete({ resortId });
-
+      const { id } = req.params;
+      const owner = await Owner.findByIdAndDelete(id);
       if (!owner) {
-        ownerLogger.warn(`Delete failed - invalid ResortID: ${resortId}`);
+        ownerLogger.warn(`Delete failed - invalid Owner ID: ${id}`);
         return res.status(404).json({ message: 'Owner not found' });
       }
 
-      ownerLogger.info(`Owner deleted - ResortID: ${resortId}`);
-
+      ownerLogger.info(`Owner deleted - ID: ${id}`);
       res.json({ message: 'Owner deleted successfully' });
     } catch (error) {
       ownerLogger.error(`Delete profile error: ${error.message}`);
@@ -178,8 +170,7 @@ const ownerController = () => {
   // @desc Logout Owner
   const logoutOwner = async (req, res) => {
     try {
-      // Since JWT is stateless, just tell frontend to clear token
-      ownerLogger.info(`Owner logged out - ResortID: ${req.body.resortId}`);
+      ownerLogger.info(`Owner logged out - ID: ${req.body.id || 'unknown'}`);
       res.json({ message: 'Logout successful. Please clear token on client.' });
     } catch (error) {
       ownerLogger.error(`Logout error: ${error.message}`);
