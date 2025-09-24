@@ -19,6 +19,7 @@
     "express-flash": "^0.0.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.1",
+    "multer": "^2.0.2",
     "winston": "^3.17.0"
   }
 }

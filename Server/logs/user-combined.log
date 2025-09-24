@@ -6,3 +6,10 @@
 2025-09-23 17:04:26 [INFO]: Profile updated - User ID: 68d2854a42480a50b59b0ae6
 2025-09-23 17:04:54 [INFO]: User deleted - ID: 68d2854a42480a50b59b0ae6
 2025-09-23 17:11:13 [WARN]: Auth failed - User not found for token
+2025-09-24 09:48:58 [INFO]: New user registered - ID: 68d371327d4a05c56646db32, Email: sharmaprince89667@gmail.com
+2025-09-24 09:57:16 [ERROR]: Registration error: Cannot destructure property 'name' of 'req.body' as it is undefined.
+2025-09-24 10:04:03 [INFO]: New user registered - ID: 68d374ba22be6e96cf0cc248, Email: sharmaprince89667@gmail.com
+2025-09-24 10:04:12 [INFO]: User logged in - ID: 68d374ba22be6e96cf0cc248
+2025-09-24 10:13:58 [INFO]: User logged in - ID: 68d374ba22be6e96cf0cc248
+2025-09-24 10:19:34 [INFO]: User logged in - ID: 68d374ba22be6e96cf0cc248
+2025-09-24 10:20:20 [INFO]: User logged in - ID: 68d374ba22be6e96cf0cc248

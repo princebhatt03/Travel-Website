@@ -9,6 +9,7 @@ const http = require('http');
 const connectToDb = require('./db/db');
 const ownerRoutes = require('./routes/owner.routes');
 const userRoutes = require('./routes/user.routes');
+const path = require('path');
 
 // Connect to Database
 connectToDb();
@@ -40,6 +41,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Session Configuration
 app.use(

@@ -2,6 +2,7 @@ const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { userLogger } = require('../utils/logger');
+const path = require('path');
 
 // Generate JWT Token
 const generateToken = id => {
@@ -12,7 +13,8 @@ const userController = () => {
   // @desc Register a new User
   const registerUser = async (req, res) => {
     try {
-      const { name, email, password, profilePhoto } = req.body;
+      const { name, email, password } = req.body;
+      const profilePhoto = req.file ? `/uploads/${req.file.filename}` : '';
 
       if (!name || !email || !password) {
         userLogger.warn(
@@ -34,7 +36,7 @@ const userController = () => {
         name,
         email,
         password: hashedPassword,
-        profilePhoto: profilePhoto || '',
+        profilePhoto,
       });
 
       userLogger.info(

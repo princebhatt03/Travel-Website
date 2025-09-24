@@ -1,10 +1,15 @@
 const express = require('express');
 const userController = require('../controllers/user.controller');
-const { protectUser } = require('../middlewares/auth.middleware'); 
+const { protectUser } = require('../middlewares/auth.middleware');
 const router = express.Router();
+const upload = require('../middlewares/upload');
 
 // Public routes
-router.post('/register', userController.registerUser);
+router.post(
+  '/register',
+  upload.single('profilePhoto'),
+  userController.registerUser
+);
 router.post('/login', userController.loginUser);
 
 // Protected routes (require JWT)
